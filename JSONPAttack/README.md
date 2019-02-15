@@ -55,3 +55,12 @@ In addition to SOP, there are now [Cross Origin Resource Sharing policies](https
 ### TODO
 * In the good actor diagram, add an annotation saying that the JSONP is then processed by client browser
 * Work in how this is an XSRF
+* Malicious case needs to be implemented. 
+* For the release version, see how we could make both the exercises in 3.9.2 symmetric.
+  * See if the same idea of the XSRF exercise would work here.
+  * Check why we don't need two servers running for XSRF exercise. 
+* In the documentation, emphasize that this requires two origins. 
+* See if Jetty will support this. 
+* HTML-ize the documentation
+* Research why enclosing the javascript in `{}` works as a defense.
+* Ask Bart about the crawling for a light architectural diagram of how to do that.

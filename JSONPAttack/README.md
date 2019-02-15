@@ -49,4 +49,4 @@ Modern sites are not susceptible to this because modern servers don't implement 
 
 To acheive the same result (getting cross origin information), it is recommended that you make a proxy server within your origin that can ping an external entity, then return that to the front end.
 
-In addition to SOP, there are now [Cross Origin Resource Sharing policies](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) (CORS) that defines how a browser and server can interact. The CORS policies are now attatched in HTTP Request and Response headers to define the interaction, and by default deny any cross origin work. 
+In addition to SOP, there are now [Cross Origin Resource Sharing policies](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) (CORS) that defines how a browser and server can interact. The CORS policies are now attatched in HTTP Request and Response headers to define the interaction. 

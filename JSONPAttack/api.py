@@ -14,9 +14,10 @@ def jsonp(f):
         result = jsonify(f(*args, **kwargs))
         callback = request.args.get('callback', False)
         if callback:
-            content = callback + '(' + result.data + ')'
+            string = str(result.data)
+            content = callback + '({})'.format(string[1:])
             return current_app.response_class(content,
-                                              mimetype='application/json')
+                                              mimetype='application/javascript')
         else:
             return result
     return decorated_function

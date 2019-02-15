@@ -3,15 +3,17 @@ from flask import request, current_app, jsonify, app, Flask
 
 app = Flask(__name__)
 
-
-def support_jsonp(f):
+'''
+Example of JSONP-able server from Flask's webpage
+http://flask.pocoo.org/snippets/79/
+'''
+def jsonp(f):
     """Wraps output to JSONP"""
     @wraps(f)
     def decorated_function(*args, **kwargs):
         result = jsonify(f(*args, **kwargs))
         callback = request.args.get('callback', False)
         if callback:
-            print(str(result.data))
             content = callback + '(' + result.data + ')'
             return current_app.response_class(content,
                                               mimetype='application/json')
@@ -19,10 +21,8 @@ def support_jsonp(f):
             return result
     return decorated_function
 
-
-# then in your view
 @app.route('/', methods=['GET'])
-@support_jsonp
+@jsonp
 def test():
     return {'foo': 'bar', "moo" : "mar"}
 

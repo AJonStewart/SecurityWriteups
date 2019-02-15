@@ -9,7 +9,7 @@ act as a middle man for fetching data.
 This lead to some security issues, however, because hackers could craft clever XSRF 
 attacks to intercept the AJAX requests and steal the data. That's a big issue, so developers got to work 
 creating a patch at the browser level.
-# How did Developers Stop This?
+## How did Developers Stop This?
 To prevent this, most browsers implemented a [Same Origin Policy](https://en.wikipedia.org/wiki/Same-origin_policy).
 The SOP disallowed communications from sources with different domain names, protocols, and port numbers. This 
 prevented attackers from creating XSRF AJAX interceptions because the browser would recognize that the user
@@ -48,3 +48,5 @@ Wrapping a returned JSON object in `{}` causes callback functions to throw synta
 Modern sites are not susceptible to this because modern servers don't implement JSONP because it's not safe.
 
 To acheive the same result (getting cross origin information), it is recommended that you make a proxy server within your origin that can ping an external entity, then return that to the front end.
+
+In addition to SOP, there are now [Cross Origin Resource Sharing policies](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) (CORS) that defines how a browser and server can interact. The CORS policies are now attatched in HTTP Request and Response headers to define the interaction, and by default deny any cross origin work. 

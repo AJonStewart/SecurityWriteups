@@ -19,6 +19,7 @@ to do that. Some legitimate uses of a cross origin request could be
 * Loading data from an API from the front end.
 To bypass this, developers started using Javascript Serialized Object Notation with Padding (JSONP).
 ## JSONP? Never Heard of it
+*A JSON Hijacking attack is an attack on webservers, not the browser of the user, persay.*
 Wikipedia has a very succinct definition of JSONP. 
 "[JSONP](https://en.wikipedia.org/wiki/JSONP) is a javascript pattern to request data by loading a 
 `<script>` tag... JSONP enables sharing of data bypassing the Same Origin Policy". Browsers
@@ -29,5 +30,21 @@ or loop surrounding it. Therefore, the browser would throw a syntax error and no
 So, someone clever proposed the idea of wrapping a returned JSON object in a Javascript function,
 and specify the callback function on the request to be said function. For this to work, the API in
 which the user called must be expecting to return *JSONP*, not just standard JSON. Now let's look at
-the standard architecture of JSONP.
+the standard architecture of JSONP. 
 
+Here we have a good actor legitimately using JSONP.
+
+![Good Actor](https://github.com/ekivolowitz/SecurityWriteups/blob/master/imgs/JSONP_Not_Malicious.png)
+
+## How the Attack Works
+An evil actor could craft a page that the user visits, with a script tag linking to a JSONP using site that the user is authenticated to. The code would be rendered on the clients screen, which would then access the clients cookies to complete an authenticated action on the legitimate server. The request returned by the good server can then be forwarded to the malicious server. Here is how an evil actor would steal information.
+
+![Evil usage](https://github.com/ekivolowitz/SecurityWriteups/blob/master/imgs/JSONP_Malicious.png)
+
+## OWASP Recommendations to Mitigating JSONP Attacks
+[OWASP's recommendations](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/AJAX_Security_Cheat_Sheet.md)
+Wrapping a returned JSON object in `{}` causes callback functions to throw syntax errors (server side).
+
+Modern sites are not susceptible to this because modern servers don't implement JSONP because it's not safe.
+
+To acheive the same result (getting cross origin information), it is recommended that you make a proxy server within your origin that can ping an external entity, then return that to the front end.

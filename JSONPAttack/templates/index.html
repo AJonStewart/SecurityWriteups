@@ -3,13 +3,12 @@
     <title>JSONP</title>
 </head>
     <body>
-        <p id="test">Hello!</p>
-        <script type="text/javascript">
-            var test = document.getElementById("test");
-            Object.prototype.__defineSetter__('blah', function (obj) {
-                test.innerHTML += '<br />' + obj;
-            });       
+        <p>Hello!</p>
+        <script type="application/javascript">
+            function run(e) {
+                alert("Hello World");
+            }     
         </script>
-        <script type="text/javascript" src="http://localhost:5000"></script>
+        <script type="application/javascript" src="http://localhost:5000?callback=run"></script>
     </body>
 </html>
